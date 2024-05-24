@@ -9,7 +9,6 @@ import UIKit
 
 final class TableViewController: UITableViewController {
     
-    let emptyCitie = Weather()
     let dataStore = DataStore.shared
     var weathers: [Weather] = []
     
@@ -17,10 +16,8 @@ final class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if weathers.isEmpty {
-            weathers = Array(repeating: emptyCitie, count: dataStore.nameCities.count)
-        }
-        addSities()
+        weathers = dataStore.nameCities.map { _ in Weather() }
+        addTown()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -57,19 +54,20 @@ final class TableViewController: UITableViewController {
     @IBAction func addNewTown(_ sender: UIBarButtonItem) {
         alertController(with: "Город", and: "Укажи название") { [unowned self] town in
             dataStore.nameCities.append(town)
-            weathers.append(emptyCitie)
-            addSities()
+            weathers.append(Weather())
+            let newIndexPath = IndexPath(row: weathers.count - 1, section: 0)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            addTown()
         }
     }
     
     
-    func addSities() {
+    func addTown() {
         networkManager.fetchCityWeather(cities: dataStore.nameCities) { [unowned self] index, weather in
             weathers[index] = weather
             weathers[index].name = self.dataStore.nameCities[index]
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                print(weather)
             }
         }
     }
