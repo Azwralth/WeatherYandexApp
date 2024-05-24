@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ulV-uk-NM8">
     <device id="retina6_72" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -80,8 +79,9 @@
                     <navigationItem key="navigationItem" title="Погода" id="Wuf-o2-J2E">
                         <barButtonItem key="backBarButtonItem" title="к списку" id="Jbj-vX-3PG"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="FLp-jD-K53">
+                            <color key="tintColor" systemColor="labelColor"/>
                             <connections>
-                                <action selector="addNewTown:" destination="xhg-wL-nmV" id="z7C-Sq-xC8"/>
+                                <action selector="addNewTown:" destination="xhg-wL-nmV" id="Bps-ZM-Sfi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -333,6 +333,9 @@
         <image name="drop.triangle" catalog="system" width="128" height="109"/>
         <image name="thermometer.medium" catalog="system" width="80" height="128"/>
         <image name="wind" catalog="system" width="128" height="103"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

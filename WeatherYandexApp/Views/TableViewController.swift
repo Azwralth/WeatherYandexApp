@@ -17,7 +17,6 @@ final class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if weathers.isEmpty {
             weathers = Array(repeating: emptyCitie, count: dataStore.nameCities.count)
         }
@@ -53,7 +52,14 @@ final class TableViewController: UITableViewController {
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
+    
+    // MARK: - Other methods
     @IBAction func addNewTown(_ sender: UIBarButtonItem) {
+        alertController(with: "Город", and: "Укажи название") { [unowned self] town in
+            dataStore.nameCities.append(town)
+            weathers.append(emptyCitie)
+            addSities()
+        }
     }
     
     
@@ -66,6 +72,23 @@ final class TableViewController: UITableViewController {
                 print(weather)
             }
         }
+    }
+    
+    private func alertController(with title: String, and message: String, completion: @escaping (String) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default) {_ in 
+            let textField = alert.textFields?.first
+            guard let inputText = textField?.text, !inputText.isEmpty else { return }
+            completion(inputText)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addTextField { textField in
+            textField.placeholder = "Введите название города"
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 }
 

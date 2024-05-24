@@ -123,7 +123,7 @@ struct Weather {
         if let date = inputDateFormatter.date(from: now_dt) {
             let hour = Calendar.current.component(.hour, from: date)
             switch hour {
-            case 24..<6:
+            case 0..<6:
                 return "night"
             case 6..<10:
                 return "morning"

@@ -64,7 +64,7 @@ final class DetailViewController: UIViewController {
         case "morning":
             imageName = "5"
         case "day":
-            imageName = "2"
+            imageName = "4"
         case "evening":
             imageName = "3"
         default:
